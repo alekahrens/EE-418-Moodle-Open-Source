@@ -18,7 +18,7 @@
  * Question type class for the short answer question type.
  *
  * @package    qtype
- * @subpackage regexanser
+ * @subpackage regexanswer
  * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/questionlib.php');
 require_once($CFG->dirroot . '/question/engine/lib.php');
-require_once($CFG->dirroot . '/question/type/regexanser/question.php');
+require_once($CFG->dirroot . '/question/type/regexanswer/question.php');
 
 
 /**
@@ -37,9 +37,9 @@ require_once($CFG->dirroot . '/question/type/regexanser/question.php');
  * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_regexanser extends question_type {
+class qtype_regexanswer extends question_type {
     public function extra_question_fields() {
-        return array('qtype_regexanser_options', 'usecase');
+        return array('qtype_regexanswer_options', 'usecase');
     }
 
     public function move_files($questionid, $oldcontextid, $newcontextid) {
