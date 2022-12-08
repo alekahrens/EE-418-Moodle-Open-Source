@@ -5144,7 +5144,7 @@ class planner_results implements renderable, templatable {
             }
             return $results;
         } else {
-            $results = "Error";
+            $results = "No Assignments";
             return $results;
         }
     }
