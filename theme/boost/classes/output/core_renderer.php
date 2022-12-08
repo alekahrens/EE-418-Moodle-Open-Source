@@ -274,7 +274,13 @@ class core_renderer extends \core_renderer {
     public function render_planner(planner_results $results)
     {
         $data = $results->export_for_template($this);
-        return $this->render_from_template($results->get_template(), array('data' => $data));
+        if ($data == "No Assignments") {
+            return $this->render_from_template('core/assignmentempty');
+        }
+        else {
+            return $this->render_from_template($results->get_template(), array('data' => $data));
+        }
+
 
     }
 }
