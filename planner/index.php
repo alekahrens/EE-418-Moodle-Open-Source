@@ -46,7 +46,7 @@ $context = context_course::instance($course->id);
 
 $PAGE->set_context($context);
 echo $OUTPUT->header();
-echo $OUTPUT->heading('Assignment Planner');
+echo $OUTPUT->heading('Assignments Overview');
 
 $renderer = $PAGE->get_renderer('core');
 $planner = new planner_results($id);
