@@ -1,0 +1,43 @@
+{{!
+    @template core/indextemplate
+}}
+
+<div class="main">
+    <table class="assignmenttable">
+        <thead>
+            <tr>
+                <th class="header c0" style="text-align:left;" scope="col">Course Name</th>
+                <th class="header c1" style="text-align:left;" scope="col">Assignments</th>
+                <th class="header c2" style="text-align:center;" scope="col">Due date</th>
+                <th class="header c3" style="text-align:center;" scope="col">Submission</th>
+                <th class="header c4 lastcol" style="text-align:right;" scope="col">Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#data}}
+            {{#.}}
+        <tr class style="border:5px">
+            <td class="cell c0" style="text-align: left; padding-right:5px; width: 25%; background-color:lightgrey">
+                        {{fullname}}
+            </td>
+            <td class="cell c1" style="text-align: left; padding-right:5px;">
+                        {{name}}
+            </td>
+            <td class="cell c2" style="text-align: center; padding: 5px; background-color:lightgrey">
+                        {{duedate}}
+            </td>
+            <td class="cell c3" style="text-align: center;">
+                        {{status}}
+            </td>
+            <td class="cell c4" style="text-align: center; background-color:lightgrey">
+                        {{finalgrade}}
+            </td>
+
+        </tr>
+
+        </tbody>
+            {{/.}}
+        {{/data}}
+
+    </table>
+</div>
