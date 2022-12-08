@@ -5113,31 +5113,33 @@ class planner_results implements renderable, templatable {
     }
 
     public function export_for_template(renderer_base $output) {
-        $servername = "localhost";
-        $username = "moodleaccess";
-        $password = "root";
-        $database = "moodle";
-        $courseid       = optional_param('course', SITEID, PARAM_INT); // course id (defaults to Site).
-        $mysql = new mysqli($servername, $username, $password, $database);
+        $mysql = new mysqli($this->servername, $this->username, $this->password, $this->database);
+        // Get the current date in Epoch format to compare to the due dates //
         $currentdate = time();
-        $query = 'SELECT mdl_course.fullname, name, duedate, mdl_assign_submission.status, mdl_grade_grades.finalgrade FROM mdl_assign INNER JOIN mdl_course ON mdl_course.id = mdl_assign.course INNER JOIN mdl_context ON mdl_assign.course = mdl_context.instanceid INNER JOIN mdl_role_assignments ON mdl_role_assignments.contextid = mdl_context.id INNER JOIN mdl_assign_submission ON mdl_assign_submission.assignment = mdl_assign.id INNER JOIN mdl_grade_items ON mdl_grade_items.itemname = mdl_assign.name INNER JOIN mdl_grade_grades ON mdl_grade_grades.itemid = mdl_grade_items.id WHERE mdl_role_assignments.userid = '. $this->userid . '  AND ' . $currentdate . '< duedate';
+        // Run the query to get the database information //
+        $query = 'SELECT mdl_course.fullname, name, duedate, mdl_assign_submission.status, mdl_grade_grades.finalgrade, mdl_grade_items.grademax FROM mdl_assign INNER JOIN mdl_course ON mdl_course.id = mdl_assign.course INNER JOIN mdl_context ON mdl_assign.course = mdl_context.instanceid INNER JOIN mdl_role_assignments ON mdl_role_assignments.contextid = mdl_context.id INNER JOIN mdl_assign_submission ON mdl_assign_submission.assignment = mdl_assign.id INNER JOIN mdl_grade_items ON mdl_grade_items.itemname = mdl_assign.name INNER JOIN mdl_grade_grades ON mdl_grade_grades.itemid = mdl_grade_items.id WHERE mdl_role_assignments.userid = '. $this->userid . '  AND ' . $currentdate . '< duedate';
         $result = $mysql->query($query);
-
+        // If there is a result found //
         if ($result !== FALSE) {
             $results = $result->fetch_all(MYSQLI_ASSOC);
             foreach ($results as $key=>$result) {
+                // Convert all duedates into a readable format for the user //
                 $results[$key]['duedate'] = date('F j, Y, g:i a', $result['duedate']);
                 if ($result['status'] == 'submitted') {
+                    // Format a better status dialogue //
                     $results[$key]['status'] = 'Submitted for grading.';
                 }
                 else {
+                    // Format a better status dialogue //
                     $results[$key]['status'] = "Not submitted.";
                 }
                 if ($result['finalgrade'] == NULL) {
+                    // If there is no grade, put a - //
                     $results[$key]['finalgrade'] = '-';
                 }
                 else {
-                    $results[$key]['finalgrade'] = (($result['finalgrade'])/100) * 100 . '%';
+                    // Put the final grade in percentage format for display //
+                    $results[$key]['finalgrade'] = ($result['finalgrade']/$result['grademax']) * 100 . '%';
                 }
             }
             return $results;
