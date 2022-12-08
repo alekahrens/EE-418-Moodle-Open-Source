@@ -5109,7 +5109,7 @@ class planner_results implements renderable, templatable {
 
     }
     public function get_template(): string {
-        return 'core/indextemplate';
+        return 'core/assignmenttemplate';
     }
 
     public function export_for_template(renderer_base $output) {
