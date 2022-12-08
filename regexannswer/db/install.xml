@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="question/type/shortanswer/db" VERSION="20130118" COMMENT="XMLDB file for Moodle question/type/shortanswer"
+<XMLDB PATH="question/type/regexanswer/db" VERSION="20130118" COMMENT="XMLDB file for Moodle question/type/regexanswer"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="qtype_shortanswer_options" COMMENT="Options for short answer questions">
+    <TABLE NAME="qtype_regexanswer_options" COMMENT="Options for short answer questions">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key references question.id."/>
@@ -17,3 +17,4 @@
     </TABLE>
   </TABLES>
 </XMLDB>
+
