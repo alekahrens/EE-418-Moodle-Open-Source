@@ -1,5 +1,5 @@
 # EE-418---Moodle-Open-Source
-To set up the assignment planner feature, first the user must edit the theme settings in moodle to add the page to the dropdown.
+To set up the assignment overview feature, first the user must edit the theme settings in moodle to add the page to the dropdown.
 Navigate to "Site Administration" -> "Appearance" -> "Theme Settings", then scroll down to the box labeled "User Menu Items". On the last line, put the following:
 Assignments|/planner/index.php
 
